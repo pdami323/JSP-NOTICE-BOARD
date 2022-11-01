@@ -31,8 +31,8 @@
 					data-toggle = "dropdown" role = "button" aria-haspopup="true"
 					aria-expanded = "false">접속하기<span class="caret"></span></a>		<!-- caret은 아이콘 -->
 					<ul class = "dropdown-menu">
-						<li class = "active"><a href = "login.jsp">로그인</a></li>		<!-- active는 현재 선택된 상태를 의미 -->
-						<li><a href = "join.jsp">회원가입</a></li>							<!-- active는 선택된 상태이므로 단 1개만 가능 -->
+						<li><a href = "login.jsp">로그인</a></li>		<!-- active는 현재 선택된 상태를 의미 -->
+						<li class = "active"><a href = "join.jsp">회원가입</a></li>							<!-- active는 선택된 상태이므로 단 1개만 가능 -->
 					</ul>
 				</li>
 			</ul>
