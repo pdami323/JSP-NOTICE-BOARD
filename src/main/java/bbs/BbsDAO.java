@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 public class BbsDAO {
 	private Connection conn;	//데이터베이스에 접근하게 해주는 객체
@@ -65,6 +66,44 @@ public class BbsDAO {
 			e.printStackTrace();
 		}
 		return -1;	//데이터베이스 오류
+	}
+	
+	public ArrayList<Bbs> getList(int pageNumber){
+		String SQL = "SELECT * FROM BBS WHERE bbsID < ? AND bbsAvailable = 1 ORDER BY bbsID DESC LIMIT 10";
+		ArrayList<Bbs> list = new ArrayList<Bbs>();
+		try {
+			PreparedStatement pstat = conn.prepareStatement(SQL);
+			pstat.setInt(1, getNext() - (pageNumber-1)*10);
+			rs = pstat.executeQuery();
+			while(rs.next()) {
+				Bbs bbs = new Bbs();
+				bbs.setBbsID(rs.getInt(1));
+				bbs.setBbsTitle(rs.getString(2));
+				bbs.setUserID(rs.getString(3));
+				bbs.setBbsDate(rs.getString(4));
+				bbs.setBbsContent(rs.getString(5));
+				bbs.setBbsAvailable(rs.getInt(6));
+				list.add(bbs);
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	public boolean nextPage(int pageNumber) {	//글의 수가 10단위인 경우 nextpage 버튼이 없어야 하므로 
+		String SQL = "SELECT * FROM BBS WHERE bbsID < ? AND bbsAvailable = 1";
+		try {
+			PreparedStatement pstat = conn.prepareStatement(SQL);
+			pstat.setInt(1, getNext() - (pageNumber-1)*10);
+			rs = pstat.executeQuery();
+			if(rs.next()) {	//다음 페이지가 있는 경우
+				return true;
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 	
 }
