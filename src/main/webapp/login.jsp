@@ -43,7 +43,7 @@
 		<div class = "col-lg-4"></div>
 		<div class = "col-lg-4">
 			<div class = "jumbotron" style = "padding-top : 20px;">
-				<form method = "post" action = "loginAction.jsp">	<!-- loginAction.jsp로 post방식을 이용하여 정보를 보내겠다는 의미 -->
+				<form method = "post" action = "loginAction.jsp">	<!-- loginAction.jsp로 post방식을 이용하여 정보를 보내겠다는 의미로 로그인 결과 화면 -->
 					<h3 style = "text-align : center;">로그인 화면</h3>
 					<div class = "form-group">
 						<input type = "text" class = "form-control" placeholder = "아이디" name = "userID" maxlength = "20">
