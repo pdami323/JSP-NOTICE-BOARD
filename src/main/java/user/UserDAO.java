@@ -43,4 +43,19 @@ public class UserDAO {
 		}
 		return -2;	//데이터베이스 오류를 의미
 	}
+	public int join(User user) {
+		String SQL = "INSERT INTO USER VALUES (?, ?, ?, ?, ?)";
+		try {
+			pstat = conn.prepareStatement(SQL);
+			pstat.setString(1, user.getUserID());
+			pstat.setString(2, user.getUserPassword());
+			pstat.setString(3, user.getUserName());
+			pstat.setString(4, user.getUserGender());
+			pstat.setString(5, user.getUserEmail());
+			return pstat.executeUpdate();		//반드시 0 이상의 숫자가 반환
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return -1;
+	}
 }
