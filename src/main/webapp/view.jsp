@@ -9,6 +9,7 @@
 <meta charset="UTF-8">
 <meta name = "viewport" content = "width=device-width", initial-scale = "1">
 <link rel="stylesheet" href = "css/bootstrap.css">
+<link rel="stylesheet" href = "css/custom.css">
 <title>JSP 게시판 웹 사이트</title>
 </head>
 <body>
@@ -90,7 +91,7 @@
 				<tbody>
 					<tr>
 						<td style = "width : 20%;">글 제목</td>
-						<td colspan = "2" ><%=bbs.getBbsTitle() %></td>
+						<td colspan = "2" ><%=bbs.getBbsTitle().replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("\n", "<br>") %></td>
 					</tr>
 					<tr>
 						<td>작성자</td>
@@ -115,7 +116,7 @@
 				if(userID != null && userID.equals(bbs.getUserID())){	//작성자와 아이디가 동일할 경우 수정도 가능
 			%>
 					<a href = "update.jsp?bbsID=<%=bbsID%>" class = "btn btn-primary">수정</a> 
-					<a href = "deleteAction.jsp?bbsID=<%=bbsID%>" class = "btn btn-primary">삭제</a> 
+					<a onclick = "return confirm('정말로 삭제하시겠습니까?')" href = "deleteAction.jsp?bbsID=<%=bbsID%>" class = "btn btn-primary">삭제</a> 
 			<%
 				}
 			%>
