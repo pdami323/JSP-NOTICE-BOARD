@@ -106,4 +106,26 @@ public class BbsDAO {
 		return false;
 	}
 	
+	public Bbs getBbs(int bbsID) {
+		String SQL = "SELECT * FROM BBS WHERE bbsID = ?";
+		try {
+			PreparedStatement pstat = conn.prepareStatement(SQL);
+			pstat.setInt(1, bbsID);
+			rs = pstat.executeQuery();
+			if(rs.next()) {	//다음 페이지가 있는 경우
+				Bbs bbs = new Bbs();
+				bbs.setBbsID(rs.getInt(1));
+				bbs.setBbsTitle(rs.getString(2));
+				bbs.setUserID(rs.getString(3));
+				bbs.setBbsDate(rs.getString(4));
+				bbs.setBbsContent(rs.getString(5));
+				bbs.setBbsAvailable(rs.getInt(6));
+				return bbs;
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
 }
